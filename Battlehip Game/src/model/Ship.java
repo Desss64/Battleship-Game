@@ -1,6 +1,6 @@
 package model;
-
-import java.util.Scanner;
+//Ship Class
+//import java.util.Scanner;
 
 public class Ship {
 	

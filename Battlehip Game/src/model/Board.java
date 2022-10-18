@@ -1,4 +1,5 @@
 package model;
+//Board Class
 
 public class Board extends Square {
 	final private int size = 8;

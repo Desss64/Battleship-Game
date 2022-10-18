@@ -1,4 +1,5 @@
 package model;
+//Submarine Class
 
 public class Submarine extends Ship{
 	public Submarine() {

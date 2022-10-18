@@ -1,4 +1,5 @@
 package model;
+//Destroyer Class
 
 public class Destroyer extends Ship{
 	public Destroyer() {

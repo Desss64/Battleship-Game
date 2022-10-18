@@ -1,4 +1,5 @@
 package model;
+//Square Class
 
 public class Square {
 	private int x,y;

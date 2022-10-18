@@ -1,4 +1,5 @@
 package model;
+//Game Class
 
 public class Game extends Board{
 	public Board[] playerBoards;

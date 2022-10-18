@@ -1,4 +1,5 @@
 package model;
+//Cruiser Class
 
 public class Cruiser extends Ship{
 	public Cruiser() {

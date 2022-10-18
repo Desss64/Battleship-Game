@@ -1,4 +1,5 @@
 package model;
+//Battleship Class
 
 public class Battleship extends Ship{
 	public Battleship() {
