@@ -40,6 +40,7 @@ public class PlayerInfoFrame extends JFrame {
 		gbc.gridy = 0;
 		add(nameField, gbc);
 		
+		// find game listener
 		fgl = new findGameListener();
 
 		// button to begin game matching
@@ -93,7 +94,6 @@ public class PlayerInfoFrame extends JFrame {
 		public void actionPerformed(ActionEvent e) {
 			// close current frame
 			setVisible(false);
-
 			// loading screen
 			createLoadingScreen();
 		}

@@ -53,10 +53,8 @@ public class MainMenuFrame extends JFrame {
 
 		// goes to screen to enter player name
 		public void actionPerformed(ActionEvent e) {
-
 			// close current frame
 			setVisible(false);
-
 			// create frame for entering player name
 			PlayerInfoFrame playerInfoFrame = new PlayerInfoFrame();
 		}
