@@ -6,7 +6,7 @@ import javax.swing.*;
 public class PlayerInfoFrame extends JFrame {
 	private JTextField nameField;
 	private findGameListener fgl;
-	private JLabel playerNameTxt;
+	private JLabel enterNameLabel;
 	private JButton findGameBtn;
 	private GridBagConstraints gbc;
 	private JFrame playerInfoScreen;
@@ -18,7 +18,6 @@ public class PlayerInfoFrame extends JFrame {
 	public void initialize(JFrame currScreen) {
 
 		playerInfoScreen = currScreen;
-
 		playerInfoScreen.setTitle("Player Information");
 
 		// set layout for frame
@@ -27,11 +26,11 @@ public class PlayerInfoFrame extends JFrame {
 		gbc.insets = new Insets(25, 5, 8, 5);
 
 		// area for player name text
-		playerNameTxt = new JLabel("Enter player name");
-		playerNameTxt.setForeground(Color.white);
+		enterNameLabel = new JLabel("Enter player name");
+		enterNameLabel.setForeground(Color.white);
 		gbc.gridx = 0;
 		gbc.gridy = 0;
-		playerInfoScreen.add(playerNameTxt, gbc);
+		playerInfoScreen.add(enterNameLabel, gbc);
 
 		// name textfield
 		nameField = new JTextField();
@@ -39,7 +38,7 @@ public class PlayerInfoFrame extends JFrame {
 		gbc.gridx = 1;
 		gbc.gridy = 0;
 		playerInfoScreen.add(nameField, gbc);
-
+		
 		// find game listener
 		fgl = new findGameListener();
 
@@ -99,12 +98,13 @@ public class PlayerInfoFrame extends JFrame {
 					loadIconArea.setVisible(false);
 					loadGameLabel.setVisible(false);
 					loadingGif.setVisible(false);
-					GameFrame gameScreen = new GameFrame(loadingScreen);
+					String pName = nameField.getText();
+					GameFrame gameScreen = new GameFrame(loadingScreen, pName);
 				}
 			};
 
 			// timer before going to next screen
-			Timer timer = new Timer(5000, openGameScreen);
+			Timer timer = new Timer(2000, openGameScreen);
 			timer.start();
 			timer.setRepeats(false);
 		}
@@ -114,8 +114,8 @@ public class PlayerInfoFrame extends JFrame {
 			// hide components from player info screen
 			nameField.setVisible(false);
 			findGameBtn.setVisible(false);
-			playerNameTxt.setVisible(false);
-
+			enterNameLabel.setVisible(false);
+			
 			// loading screen
 			createLoadingScreen(playerInfoScreen);
 		}

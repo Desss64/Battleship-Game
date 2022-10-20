@@ -11,16 +11,18 @@ public class GameFrame extends JFrame{
 	private JButton oppStatBtns[];
 	private GridBagConstraints gbc; 
 	private JFrame gameScreen;
-	
-	public GameFrame(JFrame currScreen) {	
+		
+	public GameFrame(JFrame currScreen, String name) {	
 		gameScreen = currScreen;
 		gameScreen.setTitle("Game");
 		gameScreen.setSize(800, 800);
+		gameScreen.getContentPane().setBackground(new Color(47, 69, 105));
 		
 		// display opponent grid
 		loadOppBoard();
 		
 		// display player name
+		displayPlayerName(name);
 	}
 	
 	public void loadOppBoard() {
@@ -47,8 +49,10 @@ public class GameFrame extends JFrame{
         gameScreen.setVisible(true);
 	}
 	
-	public void displayPlayerName() {
-		
+	public void displayPlayerName(String pName) {
+		JLabel name = new JLabel(pName);
+		name.setVisible(true);
+		//gameScreen.setLayout(new GridLayout());
+		gameScreen.add(name);
 	}
-
 }
