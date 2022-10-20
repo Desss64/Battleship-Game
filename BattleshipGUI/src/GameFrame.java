@@ -10,11 +10,12 @@ public class GameFrame extends JFrame{
 	private JButton userStatBtns[];
 	private JButton oppStatBtns[];
 	private GridBagConstraints gbc; 
+	private JFrame gameScreen;
 	
-	public GameFrame() {	
-		setTitle("Game");
-		setSize(800, 800);
-		setVisible(true);
+	public GameFrame(JFrame currScreen) {	
+		gameScreen = currScreen;
+		gameScreen.setTitle("Game");
+		gameScreen.setSize(800, 800);
 		
 		// display opponent grid
 		loadOppBoard();
@@ -41,9 +42,9 @@ public class GameFrame extends JFrame{
 		containerPanel.setPreferredSize(new Dimension(800, 800));
         containerPanel.add(buttonPanel);
 
-        getContentPane().add(containerPanel);
-        pack();
-        setVisible(true);
+        gameScreen.getContentPane().add(containerPanel);
+        //pack();
+        gameScreen.setVisible(true);
 	}
 	
 	public void displayPlayerName() {
