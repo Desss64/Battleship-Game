@@ -1,58 +1,45 @@
 import java.awt.*;
 import javax.swing.*;
 
-public class GameFrame extends JFrame{
-	
-	private JTextArea nameTxt; 
+/**
+ * 
+ * Represents the game screen
+ *
+ */
+public class GameFrame extends JFrame {
+
+	private JTextArea nameTxt;
 	private JTextArea oppNameTxt;
 	private JButton userBtns[];
-	private JButton oppBtns[];
 	private JButton userStatBtns[];
-	private JButton oppStatBtns[];
-	private GridBagConstraints gbc; 
+	private GridBagConstraints gbc;
 	private JFrame gameScreen;
+	private PlayerBoard pBoard;
+
+	public GameFrame(JFrame currScreen, String name) {
 		
-	public GameFrame(JFrame currScreen, String name) {	
 		gameScreen = currScreen;
 		gameScreen.setTitle("Game");
-		gameScreen.setSize(800, 800);
+		gameScreen.setSize(800, 900);
 		gameScreen.getContentPane().setBackground(new Color(47, 69, 105));
 		
-		// display opponent grid
-		loadOppBoard();
-		
+		// display player grid
+		pBoard = new PlayerBoard(gameScreen);
+				
 		// display player name
 		displayPlayerName(name);
 	}
-	
-	public void loadOppBoard() {
-		JPanel buttonPanel = new JPanel();
-		JPanel containerPanel = new JPanel();
-		buttonPanel.setLayout(new GridLayout(9, 10));
-		
-		// initialize userBtns arr
-		userBtns = new JButton[64];
-		for(int i = 0; i < userBtns.length; i++)
-			userBtns[i] = new JButton();
-		
-		// add btn array panel in grid format
-		for(int i = 0; i < userBtns.length; i++) {
-			buttonPanel.add(userBtns[i]);
-		}
-		
-		buttonPanel.setPreferredSize(new Dimension(300, 400));
-		containerPanel.setPreferredSize(new Dimension(800, 800));
-        containerPanel.add(buttonPanel);
 
-        gameScreen.getContentPane().add(containerPanel);
-        //pack();
-        gameScreen.setVisible(true);
-	}
-	
 	public void displayPlayerName(String pName) {
 		JLabel name = new JLabel(pName);
 		name.setVisible(true);
-		//gameScreen.setLayout(new GridLayout());
+		
+		// text color and font size
+		name.setForeground(Color.white);
+		name.setFont(new Font("Verdana", Font.PLAIN, 18));
+		
+		// position player name
+		gameScreen.setLayout(new FlowLayout(FlowLayout.RIGHT, 125, 350));
 		gameScreen.add(name);
 	}
 }

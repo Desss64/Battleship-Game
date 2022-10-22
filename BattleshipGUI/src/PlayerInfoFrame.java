@@ -3,6 +3,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
 
+/**
+ * 
+ * Represents screen for getting player's name
+ *
+ */
 public class PlayerInfoFrame extends JFrame {
 	private JTextField nameField;
 	private findGameListener fgl;
@@ -21,7 +26,7 @@ public class PlayerInfoFrame extends JFrame {
 		playerInfoScreen.setTitle("Player Information");
 
 		// set layout for frame
-		playerInfoScreen.setLayout(new GridBagLayout());
+		playerInfoScreen.getContentPane().setLayout(new GridBagLayout());
 		gbc = new GridBagConstraints();
 		gbc.insets = new Insets(25, 5, 8, 5);
 
@@ -30,14 +35,14 @@ public class PlayerInfoFrame extends JFrame {
 		enterNameLabel.setForeground(Color.white);
 		gbc.gridx = 0;
 		gbc.gridy = 0;
-		playerInfoScreen.add(enterNameLabel, gbc);
+		playerInfoScreen.getContentPane().add(enterNameLabel, gbc);
 
 		// name textfield
 		nameField = new JTextField();
 		nameField.setPreferredSize(new Dimension(250, 40));
 		gbc.gridx = 1;
 		gbc.gridy = 0;
-		playerInfoScreen.add(nameField, gbc);
+		playerInfoScreen.getContentPane().add(nameField, gbc);
 		
 		// find game listener
 		fgl = new findGameListener();
@@ -48,7 +53,7 @@ public class PlayerInfoFrame extends JFrame {
 		gbc.gridy = 1;
 		gbc.gridwidth = 2;
 		gbc.gridheight = 3;
-		playerInfoScreen.add(findGameBtn, gbc);
+		playerInfoScreen.getContentPane().add(findGameBtn, gbc);
 		findGameBtn.addActionListener(fgl);
 	}
 
@@ -57,13 +62,11 @@ public class PlayerInfoFrame extends JFrame {
 		public void createLoadingScreen(JFrame loadingScreen) {
 			loadingScreen.setTitle("Load Game");
 			loadingScreen.setVisible(true);
-			loadingScreen.setSize(500, 500);
 			loadingScreen.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			loadingScreen.getContentPane().setBackground(Color.white);
-			// new Color(76, 114, 173)
 
 			// set layout
-			loadingScreen.setLayout(new GridBagLayout());
+			loadingScreen.getContentPane().setLayout(new GridBagLayout());
 			gbc = new GridBagConstraints();
 
 			// place loading icon for finding match
@@ -72,7 +75,7 @@ public class PlayerInfoFrame extends JFrame {
 			gbc.gridwidth = 4;
 			ImageIcon loadingIcon = new ImageIcon("media/loading-icon.png");
 			JLabel loadIconArea = new JLabel(loadingIcon);
-			loadingScreen.add(loadIconArea, gbc);
+			loadingScreen.getContentPane().add(loadIconArea, gbc);
 
 			// resize loading gif
 			ImageIcon loading = new ImageIcon("media/Loading_icon.gif");
@@ -84,12 +87,12 @@ public class PlayerInfoFrame extends JFrame {
 			gbc.gridy = 1;
 			loading = new ImageIcon(newImg);
 			JLabel loadGameLabel = new JLabel("Loading game", SwingConstants.CENTER);
-			loadingScreen.add(loadGameLabel, gbc);
+			loadingScreen.getContentPane().add(loadGameLabel, gbc);
 
 			gbc.gridx = 1;
 			gbc.gridy = 2;
 			JLabel loadingGif = new JLabel(loading, JLabel.CENTER);
-			loadingScreen.add(loadingGif, gbc);
+			loadingScreen.getContentPane().add(loadingGif, gbc);
 
 			// action listener for opening up game screen
 			ActionListener openGameScreen = new ActionListener() {
@@ -104,7 +107,7 @@ public class PlayerInfoFrame extends JFrame {
 			};
 
 			// timer before going to next screen
-			Timer timer = new Timer(2000, openGameScreen);
+			Timer timer = new Timer(1000, openGameScreen);
 			timer.start();
 			timer.setRepeats(false);
 		}
