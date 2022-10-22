@@ -1,7 +1,7 @@
 package model;
 //Board Class
 
-public class Board extends Square {
+public class Board {
 	final private int size = 8;
 	public Square[][] boardArray;
 

@@ -1,13 +1,15 @@
 package model;
 //Ship Class
-//import java.util.Scanner;
 
 public class Ship {
 	
 	private String shipName;
 	private int shipSize;
-	public Square[] shipLocation;
+	private Boolean isVertical;
 	private int intactParts;
+	public Square[] shipLocation;
+	
+	
 	
 	
 	public String getShipName() {
@@ -28,6 +30,14 @@ public class Ship {
 		return shipSize;
 	}
 	
+	public Boolean getIsVertical() {
+		return isVertical;
+	}
+
+	public void setIsVertical(Boolean isVertical) {
+		this.isVertical = isVertical;
+	}
+	
 	public int getIntactParts() {
 		return intactParts;
 	}
@@ -40,26 +50,57 @@ public class Ship {
 		for (int i=0;i<shipSize;i++) {
 			if(shipLocation[i].getX() > 7 || shipLocation[i].getY() > 7) {
 				return true;
-			}else if(shipLocation[i].getX() < 0 || shipLocation[i].getY() < 0) {
+			}else if(shipLocation[i].getX() < 0 || shipLocation[i].getY()< 0) {
 				return true;
 			}
 		}
 		return false;
 	}
 	
-	/*public void placeShip(int size) {
-		Scanner scn = new Scanner(System.in);
-		int xVal,yVal;
-		for (int i =0;i<size;i++) {
-			System.out.println("Input x value of ship square " + (i+1));
-			xVal=scn.nextInt();
-			shipLocation[i].setX(xVal);
-			System.out.println("Input y value of ship square " + (i+1));
-			yVal=scn.nextInt();
-			shipLocation[i].setY(yVal);
+	public Boolean isOverlap(int x, int y, Board board) {
+		for (int i=0; i <getShipSize();i++) {
+			if (board.boardArray[x][y].isOccupied()== true) {
+				return true;
+			}
 		}
-		scn.close();
-	}*/
+		
+		return false;
+			
+	}
+	
+	public void placeShip(int x, int y, Board b1) {
+		for (int i = 0; i<getShipSize(); i++) {
+			if (getIsVertical()== true) {
+				shipLocation[i].setX(x);
+				shipLocation[i].setY(y+i);
+				b1[x][y+i].setIsOccupied();
+			}else {
+				shipLocation[i].setX(x+i);
+				shipLocation[i].setY(y);
+				b1[x+i][y].setIsOccupied();
+			}
+			
+			
+		}
+	}
+	
+	public void isHit(int x, int y) {
+		for (int i=0;i<shipSize;i++) {
+			if(shipLocation[i].getX() == x && shipLocation[i].getY() == y) {
+				setIntactParts(getIntactParts()-1);
+			}
+		}
+	}
+		
+	public Boolean isDestroyed() {
+		if(getIntactParts() == 0)
+			return true;
+		return false;
+	}
+
+
+
+
 
 	
 }
