@@ -4,7 +4,7 @@ package model;
 public class Square {
 	private int x,y;
 	private Boolean squareStatus = true;
-	private Boolean isOccupied = false;
+	//private Boolean isOccupied = false;
 	
 	public int getY() {
 		return y;
@@ -27,12 +27,12 @@ public class Square {
 		this.squareStatus = squareStatus;
 	}
 	
-	public Boolean getIsOccupied() {
+	/*public Boolean getIsOccupied() {
 		return isOccupied;
 	}
 	public void setIsOccupied(Boolean isoccupied) {
 		this.isOccupied = isoccupied;
-	}
+	}*/
 	
 	public Square() {
 		

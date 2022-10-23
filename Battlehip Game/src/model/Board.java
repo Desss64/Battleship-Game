@@ -3,7 +3,7 @@ package model;
 
 public class Board {
 	final private int size = 8;
-	public Square[][] boardArray;
+	public Square[][] boardArray = new Square[size][size];
 
 	public int getSize() {
 		return size;

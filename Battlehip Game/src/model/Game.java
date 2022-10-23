@@ -1,15 +1,13 @@
 package model;
 //Game Class
 
-public class Game extends Board{
+public class Game {
 	public Board[] playerBoards;
 	public int[] score;
 	public Boolean turn;
 	
-	public void generateBoards(Board b1, Board b2) {
-		b1 = new Board();
-		b2 = new OpponentsBoard();
-	}
+	
+	
 	
 	
 	

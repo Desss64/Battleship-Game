@@ -5,9 +5,9 @@ public class Ship {
 	
 	private String shipName;
 	private int shipSize;
-	private Boolean isVertical;
+	private Boolean isVertical = false;
 	private int intactParts;
-	public Square[] shipLocation;
+	public Square[] shipLocation = new Square[shipSize];
 	
 	
 	
@@ -57,27 +57,26 @@ public class Ship {
 		return false;
 	}
 	
-	public Boolean isOverlap(int x, int y, Board board) {
-		for (int i=0; i <getShipSize();i++) {
-			if (board.boardArray[x][y].isOccupied()== true) {
-				return true;
+	public Boolean isOverlap(Ship ship1) {
+		for (int i=0;i<getShipSize();i++)
+			for (int j=0;j<ship1.getShipSize();j++) {
+				if (shipLocation[i].getX() == ship1.shipLocation[j].getX() && shipLocation[i].getY() == ship1.shipLocation[j].getY()) {
+					return true;
+				}
 			}
-		}
-		
+			
 		return false;
 			
 	}
 	
-	public void placeShip(int x, int y, Board b1) {
+	public void placeShip(int x, int y) {
 		for (int i = 0; i<getShipSize(); i++) {
 			if (getIsVertical()== true) {
 				shipLocation[i].setX(x);
 				shipLocation[i].setY(y+i);
-				b1[x][y+i].setIsOccupied();
 			}else {
 				shipLocation[i].setX(x+i);
 				shipLocation[i].setY(y);
-				b1[x+i][y].setIsOccupied();
 			}
 			
 			
