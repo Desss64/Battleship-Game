@@ -6,5 +6,8 @@ public class Battleship extends Ship{
 		setShipName("Battleship");
 		setShipSize(4);
 		setIntactParts(4);
+		for (int i = 0;i<getShipSize();i++) {
+			shipLocation[i] = new Square();
+		}
 	}
 }

@@ -4,7 +4,7 @@ package model;
 public class Ship {
 	
 	private String shipName;
-	private int shipSize;
+	private int shipSize = 4;
 	private Boolean isVertical = false;
 	private int intactParts;
 	public Square[] shipLocation = new Square[shipSize];
@@ -78,8 +78,6 @@ public class Ship {
 				shipLocation[i].setX(x+i);
 				shipLocation[i].setY(y);
 			}
-			
-			
 		}
 	}
 	

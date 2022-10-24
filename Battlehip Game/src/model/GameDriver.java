@@ -8,8 +8,9 @@ public class GameDriver {
 		Board b1 = null,b2 = null;
 		Player p1 = new Player("Bryan",b1,b2);
 		
-		p1.getShipList(0).placeShip(0, 0);
-
+		p1.getShipList(4).setIsVertical(true);
+		p1.getShipList(4).placeShip(0, 0);
+		
 	}
 
 }
