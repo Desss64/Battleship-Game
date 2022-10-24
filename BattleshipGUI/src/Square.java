@@ -1,3 +1,5 @@
+import javax.swing.JButton;
+
 /**
  * 
  * Square class
