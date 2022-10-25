@@ -113,6 +113,10 @@ public class Player {
 			shipList[4].placeShip( (int)(Math.random()*(max-min+1)+min),  (int)(Math.random()*(max-min+1)+min));
 		}
 	}
+	
+	public void shoot(int x, int y, Board b2) {
+		
+	}
 
 	
 }

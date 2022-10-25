@@ -4,10 +4,10 @@ package model;
 public class Ship {
 	
 	private String shipName;
-	private int shipSize = 4;
+	private int shipSize;
 	private Boolean isVertical = false;
 	private int intactParts;
-	public Square[] shipLocation = new Square[shipSize];
+	public Square[] shipLocation = new Square[5];
 	
 	
 	
@@ -45,6 +45,12 @@ public class Ship {
 	public void setIntactParts(int intactParts) {
 		this.intactParts = intactParts;
 	}
+	
+	/*public void buildShipLocation() {
+		for (int i = 0;i<getShipSize();i++) {
+			shipLocation[i] = new Square();
+		}
+	}*/
 	
 	public Boolean isOutOfBounds() {
 		for (int i=0;i<shipSize;i++) {

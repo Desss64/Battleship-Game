@@ -6,5 +6,7 @@ public class Destroyer extends Ship{
 		setShipName("Destroyer");
 		setShipSize(2);
 		setIntactParts(2);
+		shipLocation[0]=new Square();
+		shipLocation[1]=new Square();
 	}
 }

@@ -52,5 +52,9 @@ public class Square {
 		
 	}
 	
+	public String getSquarePosition() {
+		return getX() + ", " + getY();
+	}
+	
 	
 }
