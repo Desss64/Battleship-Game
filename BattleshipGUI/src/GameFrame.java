@@ -10,28 +10,32 @@ public class GameFrame extends JFrame {
 
 	private JTextArea nameTxt;
 	private JTextArea oppNameTxt;
-	private JButton userBtns[];
 	private JButton userStatBtns[];
-	private GridBagConstraints gbc;
 	private JFrame gameScreen;
 	private PlayerBoard pBoard;
+	private OpponentsBoard oppBoard;
+	private JPanel playerInfoSection;
+	private JPanel gameWindow;
 
 	public GameFrame(JFrame currScreen, String name) {
 		
 		gameScreen = currScreen;
 		gameScreen.setTitle("Game");
-		gameScreen.setSize(800, 900);
+		gameScreen.setSize(1000, 900);
 		gameScreen.getContentPane().setBackground(new Color(47, 69, 105));
 		
-		// display player grid
-		pBoard = new PlayerBoard(gameScreen);
-				
+		// display opponent grid
+		oppBoard = new OpponentsBoard(gameScreen);
+		
 		// display player name
-		displayPlayerName(name);
+		displayPlayerName(name, oppBoard.getGamePane());
+		
+		// display player grid
+		pBoard = new PlayerBoard(gameScreen, oppBoard.getGamePane());
 	}
 
-	public void displayPlayerName(String pName) {
-		JLabel name = new JLabel(pName);
+	public void displayPlayerName(String pName, JPanel gamePane) {
+		JLabel name = new JLabel("Player name: " + pName, JLabel.CENTER);
 		name.setVisible(true);
 		
 		// text color and font size
@@ -39,7 +43,15 @@ public class GameFrame extends JFrame {
 		name.setFont(new Font("Verdana", Font.PLAIN, 18));
 		
 		// position player name
-		gameScreen.setLayout(new FlowLayout(FlowLayout.RIGHT, 125, 350));
-		gameScreen.add(name);
+		gameWindow = gamePane;
+		gameWindow.setPreferredSize(new Dimension(700, 700));
+		gameWindow.setBackground(new Color(47, 69, 105));
+		
+		// add name to cell
+		gameWindow.add(name);
+		
+		gameScreen.add(gameWindow);
+		gameWindow.setVisible(true);
+		gameScreen.setVisible(true);
 	}
 }

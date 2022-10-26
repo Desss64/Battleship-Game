@@ -15,6 +15,7 @@ public class PlayerInfoFrame extends JFrame {
 	private JButton findGameBtn;
 	private GridBagConstraints gbc;
 	private JFrame playerInfoScreen;
+	private JPanel playerInfoArea;
 
 	public PlayerInfoFrame(JFrame currScreen) {
 		initialize(currScreen);
@@ -25,35 +26,29 @@ public class PlayerInfoFrame extends JFrame {
 		playerInfoScreen = currScreen;
 		playerInfoScreen.setTitle("Player Information");
 
-		// set layout for frame
-		playerInfoScreen.getContentPane().setLayout(new GridBagLayout());
-		gbc = new GridBagConstraints();
-		gbc.insets = new Insets(25, 5, 8, 5);
+		playerInfoArea = new JPanel();
+		playerInfoArea.setBackground(new Color(47, 69, 105));
+		enterNameLabel = new JLabel();
 
-		// area for player name text
-		enterNameLabel = new JLabel("Enter player name");
+		// label text for player name
+		playerInfoArea.setLayout(new FlowLayout());
+		enterNameLabel = new JLabel("Enter player name:");
 		enterNameLabel.setForeground(Color.white);
-		gbc.gridx = 0;
-		gbc.gridy = 0;
-		playerInfoScreen.getContentPane().add(enterNameLabel, gbc);
+		playerInfoArea.add(enterNameLabel);
 
 		// name textfield
+		playerInfoArea.add(Box.createVerticalStrut(475));
 		nameField = new JTextField();
-		nameField.setPreferredSize(new Dimension(250, 40));
-		gbc.gridx = 1;
-		gbc.gridy = 0;
-		playerInfoScreen.getContentPane().add(nameField, gbc);
-		
+		nameField.setPreferredSize(new Dimension(250, 30));
+		playerInfoArea.add(nameField);
+		playerInfoScreen.getContentPane().add(playerInfoArea);
+
 		// find game listener
 		fgl = new findGameListener();
 
 		// button to begin game matching
 		findGameBtn = new JButton("Find Game");
-		gbc.gridx = 0;
-		gbc.gridy = 1;
-		gbc.gridwidth = 2;
-		gbc.gridheight = 3;
-		playerInfoScreen.getContentPane().add(findGameBtn, gbc);
+		playerInfoArea.add(findGameBtn);
 		findGameBtn.addActionListener(fgl);
 	}
 
@@ -118,7 +113,8 @@ public class PlayerInfoFrame extends JFrame {
 			nameField.setVisible(false);
 			findGameBtn.setVisible(false);
 			enterNameLabel.setVisible(false);
-			
+			playerInfoArea.setVisible(false);
+
 			// loading screen
 			createLoadingScreen(playerInfoScreen);
 		}

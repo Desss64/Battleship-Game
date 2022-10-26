@@ -8,71 +8,75 @@ import javax.swing.*;
  */
 public class PlayerBoard extends Board {
 
-	private Board playerBoard;
 	private JPanel buttonPanel;
+	private JPanel contentPane;
 	private JButton userBtns[][];
 	private JFrame gameScreen;
 	private GridBagConstraints gbc;
 	private String[] gridLetters = { "A", "B", "C", "D", "E", "F", "G", "H" };
 	private JLabel topCoordinateLabel;
 	private JLabel sideCoordinateLabel;
+	private int boardSize;
 
-	public PlayerBoard(JFrame currScreen) {
+	public PlayerBoard(JFrame currScreen, JPanel gamePane) {
 
 		// make current screen the game screen
 		gameScreen = currScreen;
 
 		// create and draw player's board
-		playerBoard = new Board();
-		draw();
+		drawPlayerBoard(gamePane);
 	}
 
 	// draw player's board
-	public void draw() {
+	public void drawPlayerBoard(JPanel gamePane) {
 		buttonPanel = new JPanel();
 		buttonPanel.setLayout(new GridBagLayout());
 		buttonPanel.setBackground(new Color(47, 69, 105));
+
 		gbc = new GridBagConstraints();
-		userBtns = new JButton[boardArray.length][boardArray.length];
+		boardSize = getSize();
+		userBtns = new JButton[boardSize][boardSize];
 
 		// top coordinate labels
-		for (int i = 0; i < boardArray.length; i++) {
+		for (int i = 0; i < boardSize; i++) {
 			gbc.gridx = i + 1;
 			gbc.gridy = 0;
-			
+
 			topCoordinateLabel = new JLabel(Integer.toString(i + 1), JLabel.CENTER);
-			topCoordinateLabel.setPreferredSize(new Dimension(25, 25));
+			topCoordinateLabel.setPreferredSize(new Dimension(12, 12));
 			topCoordinateLabel.setForeground(Color.white);
-			
+
 			buttonPanel.add(topCoordinateLabel, gbc);
 		}
 
 		// loop through boardArray creating jbutton for each cell
-		for (int i = 0; i < boardArray.length; i++) {
-			for (int j = 0; j < boardArray.length; j++) {
+		for (int i = 0; i < boardSize; i++) {
+			for (int j = 0; j < boardSize; j++) {
 				gbc.gridx = i + 1;
 				gbc.gridy = j + 1;
 				userBtns[i][j] = new JButton();
-				userBtns[i][j].setPreferredSize(new Dimension(50, 50));
+				userBtns[i][j].setPreferredSize(new Dimension(40, 40));
 				userBtns[i][j].setBackground(Color.white);
 				buttonPanel.add(userBtns[i][j], gbc);
 			}
 		}
 
 		// side coordinate labels
-		for (int i = 0; i < boardArray.length; i++) {
+		for (int i = 0; i < boardSize; i++) {
 			gbc.gridx = 0;
 			gbc.gridy = i + 1;
-			
+
 			sideCoordinateLabel = new JLabel(gridLetters[i], JLabel.CENTER);
-			sideCoordinateLabel.setPreferredSize(new Dimension(25, 25));
+			sideCoordinateLabel.setPreferredSize(new Dimension(12, 12));
 			sideCoordinateLabel.setForeground(Color.white);
-			
+
 			buttonPanel.add(sideCoordinateLabel, gbc);
 		}
 
-		gameScreen.setLayout(new FlowLayout(FlowLayout.LEFT, 150, 30));
-		gameScreen.add(buttonPanel);
-		gameScreen.setVisible(true);
+		contentPane = new JPanel();
+		contentPane.setPreferredSize(new Dimension(750, 750));
+		contentPane.add(buttonPanel);
+		contentPane.setBackground(new Color(47, 69, 105));
+		gamePane.add(contentPane);
 	}
 }
