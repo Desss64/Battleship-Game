@@ -19,7 +19,7 @@ public class OpponentsBoard extends Board {
 	public void draw() {
 		buttonPanel = new JPanel();
 		buttonPanel.setPreferredSize(new Dimension(350, 350));
-		buttonPanel.setLayout(new GridLayout(boardSize, boardSize));
+		buttonPanel.setLayout(new GridLayout(8, 8));
 		buttonPanel.setBackground(new Color(47, 69, 105));
 		boardSize = getSize();
 		oppBtns = new JButton[boardSize][boardSize];
