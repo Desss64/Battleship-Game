@@ -8,6 +8,9 @@ public class Player {
 	private String name;
 	private Ship[] shipList = new Ship[5];
 	private int fires,hits,misses,numberOfShipsLeft;
+	private Boolean turn = false;
+	public Board placementBoard;
+	public OpponentsBoard attackingBoard;
 	
 	public String getName() {
 		return name;
@@ -58,13 +61,21 @@ public class Player {
 		this.misses = misses;
 	}
 	
-	public Player(String name, Board b1,Board b2) {
+	public Boolean getTurn() {
+		return turn;
+	}
+
+	public void setTurn(Boolean turn) {
+		this.turn = turn;
+	}
+	
+	public Player(String name) {
 		setName(name);
 		buildShips();
 		setFires(0);
 		setHits(0);
 		setNumberOfShipsLeft(5);
-		generateBoards(b1,b2);
+		generateBoards();
 	}
 	
 	public void buildShips() {
@@ -75,12 +86,12 @@ public class Player {
 		shipList[4] = new Carrier();
 	}
 	
-	public void generateBoards(Board b1, Board b2) {
-		b1 = new Board();
-		b2 = new OpponentsBoard();
+	public void generateBoards() {
+		placementBoard = new Board();
+		attackingBoard = new OpponentsBoard();
 	}
 	
-	public void placeAllShips(Board b1) {
+	public void placeAllShips() {
 		int min = 0;
 		int max = 7;
 		Random rd =new Random();
@@ -114,9 +125,23 @@ public class Player {
 		}
 	}
 	
-	public void shoot(int x, int y, Board b2) {
-		
+	public void shoot(int x, int y) {
+			attackingBoard.boardArray[x][y].setSquareStatus(false);
+	}
+	
+	public void transferBoardData(Player p2) {
+		for (int i=0; i<placementBoard.getSize();i++) {
+			for (int j=0; j<placementBoard.getSize();j++) {
+				placementBoard.boardArray[i][j].setSquareStatus(p2.attackingBoard.boardArray[i][j].getSquareStatus());
+			}
+		}
 	}
 
+	public void playTurn(int x, int y, Player p2) {
+		transferBoardData(p2);
+		setTurn(true);
+		shoot(x,y);
+		setTurn(false);
+	}
 	
 }

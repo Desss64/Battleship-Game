@@ -5,18 +5,17 @@ public class GameDriver {
 	public static void main(String[] args) {
 	//Game game;
 		
-		Board b1 = null,b2 = null;
-		Player p1 = new Player("Bryan",b1,b2);
+		Player p1 = new Player("Bryan");
+		Player p2 = new Player("Sam");
 		
-		p1.placeAllShips(b1);
-		System.out.println(p1.getShipList(2).shipLocation[0].getSquarePosition());
-		System.out.println(p1.getShipList(2).shipLocation[1].getSquarePosition());
-		System.out.println(p1.getShipList(2).shipLocation[2].getSquarePosition());
+		p1.placeAllShips();
+		p2.getShipList(0).placeShip(0,0);
 		
-		System.out.println(p1.getShipList(3).shipLocation[0].getSquarePosition());
-		System.out.println(p1.getShipList(3).shipLocation[1].getSquarePosition());
-		System.out.println(p1.getShipList(3).shipLocation[2].getSquarePosition());
-		System.out.println(p1.getShipList(3).shipLocation[3].getSquarePosition());
+		
+		p1.playTurn(0, 0, p2);
+		p2.playTurn(0, 0, p1);
+		System.out.println(p2.placementBoard.boardArray[0][0].getSquareStatus()); 
+		
 	}
 
 }

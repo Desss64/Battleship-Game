@@ -66,7 +66,7 @@ public class Ship {
 	public Boolean isOverlap(Ship ship1) {
 		for (int i=0;i<getShipSize();i++)
 			for (int j=0;j<ship1.getShipSize();j++) {
-				if (shipLocation[i].getX() == ship1.shipLocation[j].getX() && shipLocation[i].getY() == ship1.shipLocation[j].getY()) {
+				if (shipLocation[i].equals(ship1.shipLocation[j])) {
 					return true;
 				}
 			}
@@ -87,9 +87,10 @@ public class Ship {
 		}
 	}
 	
-	public void isHit(int x, int y) {
+	public void isHit(int x, int y, Board b1) {
 		for (int i=0;i<shipSize;i++) {
-			if(shipLocation[i].getX() == x && shipLocation[i].getY() == y) {
+			if(b1.boardArray[x][y].getSquareStatus() == false && b1.boardArray[x][y].equals(shipLocation[i])) {
+				shipLocation[i].setSquareStatus(false);
 				setIntactParts(getIntactParts()-1);
 			}
 		}

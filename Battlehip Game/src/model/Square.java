@@ -56,5 +56,12 @@ public class Square {
 		return getX() + ", " + getY();
 	}
 	
+	public Boolean equals(Square s2) {
+		if (this.getX() == s2.getX() && this.getY() == s2.getY()) {
+			return true;
+		}
+		return false;
+	}
+	
 	
 }
