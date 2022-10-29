@@ -16,5 +16,11 @@ public class Board {
 			}
 		}
 	}
-
+	
+	/**
+	 * Displays current state of board
+	 */
+	public void showBoard() {
+		
+	}
 }

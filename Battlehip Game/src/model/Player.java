@@ -85,12 +85,15 @@ public class Player {
 		shipList[3] = new Battleship();
 		shipList[4] = new Carrier();
 	}
-
+	
 	public void generateBoards() {
 		placementBoard = new Board();
 		attackingBoard = new OpponentsBoard();
 	}
 
+	/**
+	 * Places ships in random location on player's board
+	 */
 	public void placeAllShips() {
 		int min = 0;
 		int max = 7;
@@ -134,7 +137,7 @@ public class Player {
 					(int) (Math.random() * (max - min + 1) + min));
 		}
 	}
-
+	
 	public void shoot(int x, int y) {
 		attackingBoard.boardArray[x][y].setSquareStatus(false);
 	}
