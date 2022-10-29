@@ -83,13 +83,15 @@ public class Ship {
 		}
 	}
 
-	public void isHit(int x, int y, Board b1) {
+	public Boolean isHit(int x, int y) {
 		for (int i = 0; i < shipSize; i++) {
-			if (b1.boardArray[x][y].getSquareStatus() == false && b1.boardArray[x][y].equals(shipLocation[i])) {
+			if (shipLocation[i].getSquarePosition().equals(x + ", " + y)) {
 				shipLocation[i].setSquareStatus(false);
 				setIntactParts(getIntactParts() - 1);
+				return true;
 			}
 		}
+		return false;
 	}
 
 	public Boolean isDestroyed() {
