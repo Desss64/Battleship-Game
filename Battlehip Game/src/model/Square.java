@@ -39,10 +39,10 @@ public class Square {
 
 	}
 
-	public Square(int xDimension, int yDimension, Boolean status) {
+	public Square(int xDimension, int yDimension) {
 		x = xDimension;
 		y = yDimension;
-		squareStatus = status;
+		squareStatus = true;
 	}
 
 	public char getCharacter(Square s1) {
