@@ -135,21 +135,23 @@ public class Player {
 		}
 	}
 
-	public void shoot(int x, int y) {
+	public Square shoot(int x, int y) {
+		Square s1 = new Square(x,y);
 		attackingBoard.boardArray[x][y].setSquareStatus(false);
+		return s1;
 	}
 
-	public void transferBoardData(Player p2) {
-		for (int i = 0; i < placementBoard.getSize(); i++) {
-			for (int j = 0; j < placementBoard.getSize(); j++) {
-				placementBoard.boardArray[i][j].setSquareStatus(p2.attackingBoard.boardArray[i][j].getSquareStatus());
-			}
+	public Boolean checkIsHit(Square s1) {
+		for (int i = 0; i < 5; i++) {
+			if (shipList[i].isHit(s1.getX(), s1.getY()) == true) {
+				return true;
+			}	
 		}
+		return false;
 	}
 
 	public void playTurn(int x, int y, Player p2) {
-		transferBoardData(p2);
-		setTurn(true);
+		
 		shoot(x, y);
 		setTurn(false);
 	}
