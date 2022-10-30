@@ -83,10 +83,10 @@ public class Ship {
 		}
 	}
 
-	public Boolean isHit(int x, int y) {
-		for (int i = 0; i < shipSize; i++) {
-			if (shipLocation[i].getSquarePosition().equals(x + ", " + y)) {
-				shipLocation[i].setSquareStatus(false);
+	public Boolean isHit(int x, int y, Ship ship) {
+		for (int i = 0; i < ship.shipSize; i++) {
+			if (ship.shipLocation[i].getSquarePosition().equals(x + ", " + y)) {
+				ship.shipLocation[i].setSquareStatus(false);
 				setIntactParts(getIntactParts() - 1);
 				return true;
 			}

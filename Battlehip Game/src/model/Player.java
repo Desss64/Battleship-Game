@@ -132,7 +132,7 @@ public class Player {
 
 	public Boolean checkIsHit(Square s1) {
 		for (int i = 0; i < 5; i++) {
-			if (shipList[i].isHit(s1.getX(), s1.getY())) {
+			if (shipList[i].isHit(s1.getX(), s1.getY(), shipList[i])) {
 				return true;
 			}
 		}
@@ -144,14 +144,6 @@ public class Player {
 		shoot(x, y);
 		setTurn(false);
 
-		// check if player's shot hit opponent ship
-		if (checkIsHit(shoot(x, y)))
-			hitStatus = "hit";
-		else
-			hitStatus = "missed";
-
-		// display coordinate and whether opponent ship was hit
-		System.out.println(name + " " + hitStatus + " (" + x + ", " + y + ")");
 	}
 
 }

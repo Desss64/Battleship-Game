@@ -13,28 +13,29 @@ public class Game {
 	private String playerName;
 	private int x;
 	private int y;
+	private String hitStatus;
 
 	public void gameLoop() {
 
+		// display game menu
+		menu();
+
+		// read in response to menu prompt
+		response = sc.nextInt();
+		validateResponse(response);
+		sc.nextLine();
+
+		// create player
+		System.out.print("\nEnter a player name: ");
+		playerName = sc.nextLine();
+		Player p1 = new Player(playerName);
+		Player p2 = new Player("Sam");
+
+		// randomly place ships
+		p1.placeAllShips();
+		p2.placeAllShips();
+
 		while (true) {
-			// display game menu
-			menu();
-
-			// read in response to menu prompt
-			response = sc.nextInt();
-			validateResponse(response);
-			sc.nextLine();
-
-			// create player
-			System.out.print("\nEnter a player name: ");
-			playerName = sc.nextLine();
-			Player p1 = new Player(playerName);
-			Player p2 = new Player("Sam");
-
-			// randomly place ships
-			p1.placeAllShips();
-			p2.placeAllShips();
-
 			for (int i = 0; i < 5; i++) {
 				for (int j = 0; j < p1.getShipList(i).getShipSize(); j++) {
 					System.out.println(p1.getShipList(i).shipLocation[j].getSquarePosition());
@@ -50,16 +51,17 @@ public class Game {
 			}
 
 			// fire shot
-			System.out.println();
 			System.out.println("Coordinate pair to fire shot (x, y)");
 			System.out.print("Enter x: ");
 			x = sc.nextInt();
 			System.out.print("Enter y: ");
 			y = sc.nextInt();
-
 			System.out.println();
+
 			p1.playTurn(x, y);
+			getHitStatus(p1, p2, x, y);
 			p2.playTurn(0, 0);
+			getHitStatus(p2, p1, 0, 0);
 
 			// p2.getShipList(0).placeShip(0, 0);
 
@@ -125,6 +127,17 @@ public class Game {
 				response = sc.nextInt();
 			}
 		} while (response != 0 && response != 1);
+	}
+
+	public void getHitStatus(Player playerShooting, Player playerShot, int x, int y) {
+		// check if player's shot hit opponent ship
+		if (playerShot.checkIsHit(playerShooting.shoot(x, y)))
+			hitStatus = "hit";
+		else
+			hitStatus = "missed";
+
+		// display coordinate and whether opponent ship was hit
+		System.out.println(playerShooting.getName() + " " + hitStatus + " (" + x + ", " + y + ")");
 	}
 
 }

@@ -45,7 +45,6 @@ public class Square {
 			return 'X';
 		}
 		return 'O';
-
 	}
 
 	public String getSquarePosition() {
