@@ -12,7 +12,7 @@ public class Board {
 	public Board() {
 		for (int i = 0; i < size; i++) {
 			for (int j = 0; j < size; j++) {
-				boardArray[i][j] = new Square(i, j, true);
+				boardArray[i][j] = new Square(i, j);
 			}
 		}
 	}

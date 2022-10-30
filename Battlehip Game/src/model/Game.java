@@ -1,16 +1,14 @@
 package model;
-
 import java.util.Scanner;
 
 //Game Class
-
 public class Game {
 	// public Board[] playerBoards;
-	private int[] score = new int[2];
 	private String title = "Battleship";
 	private String menuText = "Enter 1 to play or 0 for rules";
 	private Scanner sc = new Scanner(System.in);
 	private int response;
+	private int score;
 
 	public void gameLoop() {
 
@@ -58,21 +56,13 @@ public class Game {
 		}
 	}
 
-	public int[] getScore() {
+	public int getScore() {
 		return score;
 	}
 
-	public int getP1Score() {
-		return score[0];
-	}
-
-	public int getP2Score() {
-		return score[1];
-	}
-
-	public void setScore(Player p1, Player p2) {
-		score[0] = p1.getNumberOfShipsLeft();
-		score[1] = p2.getNumberOfShipsLeft();
+	
+	public void setScore(Player p1) {
+		score = p1.getNumberOfShipsLeft();
 	}
 
 	/**
