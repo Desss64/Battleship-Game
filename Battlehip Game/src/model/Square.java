@@ -30,11 +30,6 @@ public class Square {
 		this.squareStatus = squareStatus;
 	}
 
-	/*
-	 * public Boolean getIsOccupied() { return isOccupied; } public void
-	 * setIsOccupied(Boolean isoccupied) { this.isOccupied = isoccupied; }
-	 */
-
 	public Square() {
 
 	}

@@ -11,49 +11,72 @@ public class Game {
 	private int response;
 	private int score;
 	private String playerName;
+	private int x;
+	private int y;
 
 	public void gameLoop() {
 
-		// display game menu
-		menu();
+		while (true) {
+			// display game menu
+			menu();
 
-		// read in response to menu prompt
-		response = sc.nextInt();
-		validateResponse(response);
-		sc.nextLine();
+			// read in response to menu prompt
+			response = sc.nextInt();
+			validateResponse(response);
+			sc.nextLine();
 
-		// create player
-		System.out.println("\nEnter a player name: ");
-		playerName = sc.nextLine();
-		Player p1 = new Player(playerName);
-		
-		Player p2 = new Player("Sam");
+			// create player
+			System.out.print("\nEnter a player name: ");
+			playerName = sc.nextLine();
+			Player p1 = new Player(playerName);
+			Player p2 = new Player("Sam");
 
-		// randomly place ships
-		p1.placeAllShips();
-		p2.placeAllShips();
-		
-		for (int i = 0; i < 5; i++) {
-			for (int j = 0; j < p1.getShipList(i).getShipSize(); j++) {
-				System.out.println(p1.getShipList(i).shipLocation[j].getSquarePosition());
+			// randomly place ships
+			p1.placeAllShips();
+			p2.placeAllShips();
+
+			for (int i = 0; i < 5; i++) {
+				for (int j = 0; j < p1.getShipList(i).getShipSize(); j++) {
+					System.out.println(p1.getShipList(i).shipLocation[j].getSquarePosition());
+				}
+				System.out.println();
 			}
+
+			for (int i = 0; i < 5; i++) {
+				for (int j = 0; j < p2.getShipList(i).getShipSize(); j++) {
+					System.out.println(p2.getShipList(i).shipLocation[j].getSquarePosition());
+				}
+				System.out.println();
+			}
+
+			// fire shot
+			System.out.println();
+			System.out.println("Coordinate pair to fire shot (x, y)");
+			System.out.print("Enter x: ");
+			x = sc.nextInt();
+			System.out.print("Enter y: ");
+			y = sc.nextInt();
+
+			System.out.println();
+			p1.playTurn(x, y);
+			p2.playTurn(0, 0);
+
+			// p2.getShipList(0).placeShip(0, 0);
+
+			// print scores and check winning condition (all opponent ships sunk)
+			if (p1.getNumberOfShipsLeft() == 0) {
+				System.out.println(p1.getName() + " won!");
+			} else if (p2.getNumberOfShipsLeft() == 0) {
+				System.out.println(p2.getName() + " won!");
+			}
+
+			System.out.println();
+			setScore(p1);
+			System.out.println(playerName + "'s score: " + score);
+			setScore(p2);
+			System.out.println(p2.getName() + "'s score: " + score);
 			System.out.println();
 		}
-		
-		/*System.out.println("Coordinate pair to fire shot (x, y)");
-		System.out.println("Enter an x coordinate : ");
-		System.out.println("Enter an x coordinate : ");
-		
-		p1.playTurn();*/
-		
-		// display coordinates and whether ship was hit (ex: player missed (3, 4) or player hit (3, 4))
-
-		// p2.getShipList(0).placeShip(0, 0);
-
-		// p.playTurn(0, 0);
-
-		// check for winning condition (all opponent ships have been sunk)
-
 	}
 
 	// displays main menu
