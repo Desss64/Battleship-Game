@@ -1,4 +1,5 @@
 package model;
+
 import java.util.Scanner;
 
 //Game Class
@@ -9,32 +10,57 @@ public class Game {
 	private Scanner sc = new Scanner(System.in);
 	private int response;
 	private int score;
+	private String playerName;
 
 	public void gameLoop() {
 
+		// display game menu
 		menu();
 
-		// read in response from user
+		// read in response to menu prompt
 		response = sc.nextInt();
 		validateResponse(response);
+		sc.nextLine();
 
-		Player p1 = new Player("Bryan");
+		// create player
+		System.out.println("\nEnter a player name: ");
+		playerName = sc.nextLine();
+		Player p1 = new Player(playerName);
+		
 		Player p2 = new Player("Sam");
 
+		// randomly place ships
 		p1.placeAllShips();
+		p2.placeAllShips();
+		
+		for (int i = 0; i < 5; i++) {
+			for (int j = 0; j < p1.getShipList(i).getShipSize(); j++) {
+				System.out.println(p1.getShipList(i).shipLocation[j].getSquarePosition());
+			}
+			System.out.println();
+		}
+		
+		/*System.out.println("Coordinate pair to fire shot (x, y)");
+		System.out.println("Enter an x coordinate : ");
+		System.out.println("Enter an x coordinate : ");
+		
+		p1.playTurn();*/
+		
+		// display coordinates and whether ship was hit (ex: player missed (3, 4) or player hit (3, 4))
 
-		p2.getShipList(0).placeShip(0, 0);
+		// p2.getShipList(0).placeShip(0, 0);
 
-		p1.playTurn(0, 0, p2);
-		p2.playTurn(0, 0, p1);
+		// p.playTurn(0, 0);
+
+		// check for winning condition (all opponent ships have been sunk)
 
 	}
 
 	// displays main menu
 	public void menu() {
-		int cols = 45;
-		int rows = 9;
-		int charIndex = 0;
+		int cols = 45; // cols of menu box
+		int rows = 9; // rows of menu box
+		int charIndex = 0; // index to loop through menu string
 
 		for (int i = 1; i <= rows; i++) {
 			for (int j = 1; j <= cols; j++) {
@@ -60,7 +86,6 @@ public class Game {
 		return score;
 	}
 
-	
 	public void setScore(Player p1) {
 		score = p1.getNumberOfShipsLeft();
 	}

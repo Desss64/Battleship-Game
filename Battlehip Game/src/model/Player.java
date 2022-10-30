@@ -95,46 +95,31 @@ public class Player {
 	 * Places ships in random location on player's board
 	 */
 	public void placeAllShips() {
-		int min = 0;
-		int max = 7;
+		int max = 8;
 		Random rd = new Random();
-
-		shipList[0].setIsVertical(rd.nextBoolean());
-		shipList[0].placeShip((int) (Math.random() * (max - min + 1) + min),
-				(int) (Math.random() * (max - min + 1) + min));
-
-		shipList[1].setIsVertical(rd.nextBoolean());
-		shipList[1].placeShip((int) (Math.random() * (max - min + 1) + min),
-				(int) (Math.random() * (max - min + 1) + min));
-		while (shipList[1].isOverlap(shipList[0]) == true) {
-			shipList[1].placeShip((int) (Math.random() * (max - min + 1) + min),
-					(int) (Math.random() * (max - min + 1) + min));
-		}
-
-		shipList[2].setIsVertical(rd.nextBoolean());
-		shipList[2].placeShip((int) (Math.random() * (max - min + 1) + min),
-				(int) (Math.random() * (max - min + 1) + min));
-		while (shipList[2].isOverlap(shipList[0]) == true || shipList[2].isOverlap(shipList[1]) == true) {
-			shipList[2].placeShip((int) (Math.random() * (max - min + 1) + min),
-					(int) (Math.random() * (max - min + 1) + min));
-		}
-
-		shipList[3].setIsVertical(rd.nextBoolean());
-		shipList[3].placeShip((int) (Math.random() * (max - min + 1) + min),
-				(int) (Math.random() * (max - min + 1) + min));
-		while (shipList[3].isOverlap(shipList[0]) == true || shipList[3].isOverlap(shipList[1]) == true
-				|| shipList[3].isOverlap(shipList[2]) == true) {
-			shipList[3].placeShip((int) (Math.random() * (max - min + 1) + min),
-					(int) (Math.random() * (max - min + 1) + min));
-		}
-
-		shipList[4].setIsVertical(rd.nextBoolean());
-		shipList[4].placeShip((int) (Math.random() * (max - min + 1) + min),
-				(int) (Math.random() * (max - min + 1) + min));
-		while (shipList[4].isOverlap(shipList[0]) == true || shipList[4].isOverlap(shipList[1]) == true
-				|| shipList[4].isOverlap(shipList[2]) == true || shipList[4].isOverlap(shipList[3]) == true) {
-			shipList[4].placeShip((int) (Math.random() * (max - min + 1) + min),
-					(int) (Math.random() * (max - min + 1) + min));
+				
+		// randomly place each player's ship on their board
+		for (int i = 0; i < shipList.length; i++) {
+			for (int j = 0; j < getShipList(i).getShipSize(); j++) {
+				
+				// set value for if ship is vertical or not
+				shipList[i].setIsVertical(rd.nextBoolean());
+				
+				// place ship in random spot on grid
+				shipList[i].placeShip((int) (Math.random() * max), (int) (Math.random() * max));
+				
+				// if ship is out of bounds during placement
+				while(shipList[i].isOutOfBounds()) {
+					shipList[i].placeShip((int) (Math.random() * max), (int) (Math.random() * max));
+				}
+				
+				// if ship placement overlaps with another ship
+				if(i > 0) {
+					while (shipList[i].isOverlap(shipList[i-1]) == true) {
+						shipList[i].placeShip((int) (Math.random() * max), (int) (Math.random() * max));
+					}
+				}
+			}
 		}
 	}
 
@@ -153,7 +138,7 @@ public class Player {
 		return false;
 	}
 
-	public void playTurn(int x, int y, Player p2) {
+	public void playTurn(int x, int y) {
 		
 		shoot(x, y);
 		setTurn(false);
