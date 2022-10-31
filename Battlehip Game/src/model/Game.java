@@ -63,21 +63,21 @@ public class Game {
 			p2.playTurn(0, 0);
 			getHitStatus(p2, p1, 0, 0);
 
-			// p2.getShipList(0).placeShip(0, 0);
-
-			// print scores and check winning condition (all opponent ships sunk)
+			// check winning condition (all opponent ships sunk)
 			if (p1.getNumberOfShipsLeft() == 0) {
 				System.out.println(p1.getName() + " won!");
+				p1.setWinCount(p1.getWinCount() + 1);
+
 			} else if (p2.getNumberOfShipsLeft() == 0) {
 				System.out.println(p2.getName() + " won!");
+				p2.setWinCount(p2.getWinCount() + 1);
 			}
 
 			System.out.println();
-			setScore(p1);
-			System.out.println(playerName + "'s score: " + score);
-			setScore(p2);
-			System.out.println(p2.getName() + "'s score: " + score);
-			System.out.println();
+
+			// display stats for each player
+			midGameStats(p1);
+			midGameStats(p2);
 		}
 	}
 
@@ -138,6 +138,31 @@ public class Game {
 
 		// display coordinate and whether opponent ship was hit
 		System.out.println(playerShooting.getName() + " " + hitStatus + " (" + x + ", " + y + ")");
+	}
+
+	public void midGameStats(Player p) {
+		// player name
+		System.out.println(p.getName());
+		
+		// number of ships left
+		for (int i = 0; i < 5; i++) {
+			if (p.getShipList(i).isDestroyed())
+				p.setNumberOfShipsLeft(p.getNumberOfShipsLeft() - 1);
+		}
+
+		System.out.println("Ships Left: " + p.getNumberOfShipsLeft());
+		System.out.println();
+	}
+
+	public void endGameStats(Player p) {
+		// number of shots fired
+		System.out.println("Fires: " + p.getFires());
+
+		// number of misses
+		System.out.println("Misses: " + p.getMisses());
+
+		// number of wins
+		System.out.println("Wins: " + p.getWinCount());
 	}
 
 }

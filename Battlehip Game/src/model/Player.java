@@ -11,10 +11,18 @@ public class Player {
 	private Boolean turn = false;
 	public Board placementBoard;
 	public OpponentsBoard attackingBoard;
-	private String hitStatus;
-
+	private int winCount;
+	
 	public String getName() {
 		return name;
+	}
+	
+	public int getWinCount() {
+		return winCount;
+	}
+	
+	public void setWinCount(int winCount) {
+		this.winCount = winCount;
 	}
 
 	public void setName(String name) {
@@ -77,6 +85,7 @@ public class Player {
 		setHits(0);
 		setNumberOfShipsLeft(5);
 		generateBoards();
+		setWinCount(0);
 	}
 
 	public void buildShips() {
@@ -97,10 +106,12 @@ public class Player {
 	 */
 	public void placeAllShips() {
 		int max = 8;
+		int shipIndex;
 		Random rd = new Random();
 
 		// randomly place each player's ship on their board
 		for (int i = 0; i < shipList.length; i++) {
+			shipIndex = 0;
 			for (int j = 0; j < getShipList(i).getShipSize(); j++) {
 
 				// set value for if ship is vertical or not
@@ -116,8 +127,9 @@ public class Player {
 
 				// if ship overlaps with another ship
 				if (i > 0) {
-					while (shipList[i].isOverlap(shipList[i - 1])) {
+					while (shipList[i].isOverlap(shipList[shipIndex]) && i != shipIndex) {
 						shipList[i].placeShip((int) (Math.random() * max), (int) (Math.random() * max));
+						shipIndex++;
 					}
 				}
 			}
