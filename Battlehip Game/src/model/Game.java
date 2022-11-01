@@ -39,7 +39,6 @@ public class Game {
 		p1.placementBoard.showBoard(p1.placementBoard.gameBoard, p1.getName());
 
 		p2.placeAllShips();
-		//p1.placementBoard.showBoard(p1.attackingBoard.gameBoard);
 
 		// to test if player 2 board is being hit
 		p2.placementBoard.showBoard(p2.placementBoard.gameBoard, p2.getName());
@@ -59,7 +58,8 @@ public class Game {
 
 			p1.playTurn(x, y);
 			getHitStatus(p1, p2, x, y);
-			p2.placementBoard.showBoard(p2.placementBoard.gameBoard, p2.getName());
+			//p2.placementBoard.showBoard(p2.placementBoard.gameBoard, p2.getName());
+			p2.placementBoard.showBoard(p2.attackingBoard.gameBoard, p2.getName());
 
 			int randX = (int) (Math.random() * 8);
 			int randY = (int) (Math.random() * 8);
