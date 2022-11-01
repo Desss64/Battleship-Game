@@ -12,5 +12,6 @@ public class Carrier extends Ship{
 		shipLocation[2]=new Square();
 		shipLocation[3]=new Square();
 		shipLocation[4]=new Square();
+		setShipSymbol("C");
 	}
 }

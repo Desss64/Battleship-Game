@@ -1,12 +1,13 @@
 package model;
 
+import java.util.Random;
 import java.util.Scanner;
 
 //Game Class
 public class Game {
 	// public Board[] playerBoards;
 	private String title = "Battleship";
-	private String menuText = "Enter 1 to play or 0 for rules";
+	private String menuText = "Enter 1 to play";
 	private Scanner sc = new Scanner(System.in);
 	private int response;
 	private int score;
@@ -24,6 +25,8 @@ public class Game {
 		response = sc.nextInt();
 		validateResponse(response);
 		sc.nextLine();
+		
+		introText();
 
 		// create player
 		System.out.print("\nEnter a player name: ");
@@ -33,42 +36,45 @@ public class Game {
 
 		// randomly place ships
 		p1.placeAllShips();
+		p1.placementBoard.showBoard(p1.placementBoard.gameBoard, p1.getName());
+
 		p2.placeAllShips();
+		//p1.placementBoard.showBoard(p1.attackingBoard.gameBoard);
+
+		// to test if player 2 board is being hit
+		p2.placementBoard.showBoard(p2.placementBoard.gameBoard, p2.getName());
+
+		Random rd = new Random();
 
 		while (true) {
-			for (int i = 0; i < 5; i++) {
-				for (int j = 0; j < p1.getShipList(i).getShipSize(); j++) {
-					System.out.println(p1.getShipList(i).shipLocation[j].getSquarePosition());
-				}
-				System.out.println();
-			}
-
-			for (int i = 0; i < 5; i++) {
-				for (int j = 0; j < p2.getShipList(i).getShipSize(); j++) {
-					System.out.println(p2.getShipList(i).shipLocation[j].getSquarePosition());
-				}
-				System.out.println();
-			}
+			rd = new Random();
 
 			// fire shot
-			System.out.println("Coordinate pair to fire shot (x, y)");
-			System.out.print("Enter x: ");
+			System.out.println("X and Y coordinate to fire shot");
+			System.out.print("Enter X: ");
 			x = sc.nextInt();
-			System.out.print("Enter y: ");
+			System.out.print("Enter Y: ");
 			y = sc.nextInt();
 			System.out.println();
 
 			p1.playTurn(x, y);
 			getHitStatus(p1, p2, x, y);
-			p2.playTurn(0, 0);
-			getHitStatus(p2, p1, 0, 0);
+			p2.placementBoard.showBoard(p2.placementBoard.gameBoard, p2.getName());
 
-			// check winning condition (all opponent ships sunk)
+			int randX = (int) (Math.random() * 8);
+			int randY = (int) (Math.random() * 8);
+
+			p2.playTurn(randX, randY);
+			getHitStatus(p2, p1, randX, randY);
+			p1.placementBoard.showBoard(p1.placementBoard.gameBoard, p1.getName());
+
+			// check winning condition (all opponent ships sunk) 
 			if (p1.getNumberOfShipsLeft() == 0) {
 				System.out.println(p1.getName() + " won!");
 				p1.setWinCount(p1.getWinCount() + 1);
+			}
 
-			} else if (p2.getNumberOfShipsLeft() == 0) {
+			else if (p2.getNumberOfShipsLeft() == 0) {
 				System.out.println(p2.getName() + " won!");
 				p2.setWinCount(p2.getWinCount() + 1);
 			}
@@ -78,7 +84,9 @@ public class Game {
 			// display stats for each player
 			midGameStats(p1);
 			midGameStats(p2);
+
 		}
+
 	}
 
 	// displays main menu
@@ -94,7 +102,7 @@ public class Game {
 				else if (i == 3 && j >= 18 && j < 18 + title.length()) {
 					System.out.print(title.charAt(charIndex));
 					charIndex++;
-				} else if (i == 6 && j >= 8 && j < 8 + menuText.length()) {
+				} else if (i == 6 && j >= 15 && j < 15 + menuText.length()) {
 					System.out.print(menuText.charAt(charIndex));
 					charIndex++;
 				} else {
@@ -131,7 +139,7 @@ public class Game {
 
 	public void getHitStatus(Player playerShooting, Player playerShot, int x, int y) {
 		// check if player's shot hit opponent ship
-		if (playerShot.checkIsHit(playerShooting.shoot(x, y)))
+		if (playerShot.checkIsHit(playerShooting.shoot(x, y), playerShot))
 			hitStatus = "hit";
 		else
 			hitStatus = "missed";
@@ -143,7 +151,7 @@ public class Game {
 	public void midGameStats(Player p) {
 		// player name
 		System.out.println(p.getName());
-		
+
 		// number of ships left
 		for (int i = 0; i < 5; i++) {
 			if (p.getShipList(i).isDestroyed())
@@ -163,6 +171,12 @@ public class Game {
 
 		// number of wins
 		System.out.println("Wins: " + p.getWinCount());
+	}
+	
+	public void introText() {
+		System.out.println();
+		System.out.println("Welcome to the game Battleship! Your ship selection is Battleship (B), \n"
+				+ "Carrier (C), Cruiser (U), Submarine (S) and Destroyer (D) ");
 	}
 
 }

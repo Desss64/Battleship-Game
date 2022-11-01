@@ -10,5 +10,6 @@ public class Battleship extends Ship{
 		shipLocation[1]=new Square();
 		shipLocation[2]=new Square();
 		shipLocation[3]=new Square();
+		setShipSymbol("B");
 	}
 }

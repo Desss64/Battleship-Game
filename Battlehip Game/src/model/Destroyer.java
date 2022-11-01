@@ -8,5 +8,6 @@ public class Destroyer extends Ship{
 		setIntactParts(2);
 		shipLocation[0]=new Square();
 		shipLocation[1]=new Square();
+		setShipSymbol("D");
 	}
 }

@@ -118,17 +118,17 @@ public class Player {
 				shipList[i].setIsVertical(rd.nextBoolean());
 
 				// place ship in random spot on grid
-				shipList[i].placeShip((int) (Math.random() * max), (int) (Math.random() * max));
+				shipList[i].placeShip((int) (Math.random() * max), (int) (Math.random() * max), this, shipList[i]);
 
 				// if ship is out of bounds during placement
 				while (shipList[i].isOutOfBounds()) {
-					shipList[i].placeShip((int) (Math.random() * max), (int) (Math.random() * max));
+					shipList[i].placeShip((int) (Math.random() * max), (int) (Math.random() * max), this, shipList[i]);
 				}
 
 				// if ship overlaps with another ship
 				if (i > 0) {
 					while (shipList[i].isOverlap(shipList[shipIndex]) && i != shipIndex) {
-						shipList[i].placeShip((int) (Math.random() * max), (int) (Math.random() * max));
+						shipList[i].placeShip((int) (Math.random() * max), (int) (Math.random() * max), this, shipList[i]);
 						shipIndex++;
 					}
 				}
@@ -142,9 +142,10 @@ public class Player {
 		return s1;
 	}
 
-	public Boolean checkIsHit(Square s1) {
-		for (int i = 0; i < 5; i++) {
-			if (shipList[i].isHit(s1.getX(), s1.getY(), shipList[i])) {
+	public Boolean checkIsHit(Square s1, Player p) {
+		for(int i = 0; i < 5; i++) {
+			if(shipList[i].isHit(s1.getX(), s1.getY(), shipList[i], p)) {
+				setHits(hits + 1);
 				return true;
 			}
 		}
@@ -152,7 +153,6 @@ public class Player {
 	}
 
 	public void playTurn(int x, int y) {
-
 		shoot(x, y);
 		setTurn(false);
 

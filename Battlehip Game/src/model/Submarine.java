@@ -9,5 +9,6 @@ public class Submarine extends Ship{
 		shipLocation[0]=new Square();
 		shipLocation[1]=new Square();
 		shipLocation[2]=new Square();
+		setShipSymbol("S");
 	}
 }
