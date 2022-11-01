@@ -106,7 +106,7 @@ public class Player {
 	 */
 	public void placeAllShips() {
 		int max = 8;
-		int shipIndex;
+		int shipIndex, randX, randY;
 		Random rd = new Random();
 
 		// randomly place each player's ship on their board
@@ -130,7 +130,9 @@ public class Player {
 			if (i > 0) {
 				while (shipList[i].isOverlap(shipList[shipIndex], this, rd.nextInt(max), rd.nextInt(max))
 						&& i != shipIndex) {
-					shipList[i].placeShip(rd.nextInt(max), rd.nextInt(max), this);
+					randX = rd.nextInt(max);
+					randY = rd.nextInt(max);
+					shipList[i].placeShip(randX, randY, this);
 					shipIndex++;
 				}
 			}

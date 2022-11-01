@@ -32,7 +32,7 @@ public class Game {
 		System.out.print("\nEnter a player name: ");
 		playerName = sc.nextLine();
 		Player p1 = new Player(playerName);
-		Player p2 = new Player("Sam");
+		Player p2 = new Player("Computer");
 
 		// randomly place ships
 		p1.placeAllShips();

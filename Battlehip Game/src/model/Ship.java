@@ -81,7 +81,7 @@ public class Ship {
 
 		for (int i = 0; i < getShipSize(); i++)
 			for (int j = 0; j < ship1.getShipSize(); j++) {
-				if (p.placementBoard.gameBoard[x][y] != "-") {
+				if (shipLocation[i].equals(ship1.shipLocation[j]) && p.placementBoard.gameBoard[x][y] != "-") {
 					p.placementBoard.gameBoard[x][y] = ship1.getShipSymbol();
 					return true;
 				}
@@ -113,7 +113,7 @@ public class Ship {
 				setIntactParts(getIntactParts() - 1);
 				
 				// set contents to 'x'
-				if (p.getName() == "Sam")
+				if (p.getName() == "Computer")
 					p.attackingBoard.gameBoard[x][y] = "X";
 				else {
 					p.placementBoard.gameBoard[x][y] = "X";
